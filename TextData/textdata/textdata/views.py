@@ -21,6 +21,7 @@ def analyze(request):
     djtext = request.GET.get('text', 'default')
     removepunc = request.GET.get('removepunc', 'off')
     capitaliz = request.GET.get('capitaliz', 'off')
+    newlineremover = request.GET.get('newlineremover', 'off')
 
     # check for panctuation mark
     if removepunc == "on":
@@ -37,7 +38,7 @@ def analyze(request):
             'purpose': 'Removed Punctuations',
             'analyzed_text': analyzed
         }
-
+    # make it as capitaliz
     elif capitaliz == "on":
 
         analyzed = djtext.upper()
@@ -46,7 +47,14 @@ def analyze(request):
             'purpose': 'Change to Upper-Case',
             'analyzed_text': analyzed
         }
+    # remve new line
+    elif newlineremover == "on":
+        analyzed = ""
+        params = {
+            'purpose': 'Removed New Line',
+            'analyzed_text': analyzed
+        }
 
-        return render(request, 'analyze.html', params)
     else:
         return HttpResponse('Error')
+    return render(request, 'analyze.html', params)
