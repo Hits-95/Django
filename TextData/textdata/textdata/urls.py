@@ -16,7 +16,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
+
+# video - 6
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+#     path('', views.index, name = "index"),
+#     # for calling about_hits use this url type in browser
+#     # http://127.0.0.1:8000/about_hits/
+#     path('about_hits/', views.about_hits, name = "about_hits"),
+# ]
+
+# video - 7
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name = "index"),
+    path('', views.index, name="index"),
+    path('removepunc/', views.removepunc, name="removepunc"),
+
 ]
