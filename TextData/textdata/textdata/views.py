@@ -16,6 +16,26 @@ def index(request):
     # return HttpResponse("<h2 style = 'color : green', > Hitesh Ahire </h2>")
 
 
-def removepunc(request):
-    print(request.GET.get('text', 'default'))
-    return HttpResponse("remove punc")
+def analyze(request):
+    # Get the text
+    djtext = request.GET.get('text', 'default')
+    removepunc = request.GET.get('removepunc', 'off')
+
+    if removepunc == "on":
+        punctuations = '''!()-[]{};:\'",<>./?@#$%^&*_~'''
+
+        analyzed = ""
+
+        # bind analyze
+        for char in djtext:
+            if char not in punctuations:
+                analyzed = analyzed + char
+
+        params = {
+            'purpose': 'Removed Punctuations',
+            'analyzed_text': analyzed
+        }
+        return render(request, 'analyze.html', params)
+
+    else:
+        return HttpResponse('Error')
