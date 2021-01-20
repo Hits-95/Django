@@ -20,7 +20,9 @@ def analyze(request):
     # Get the text
     djtext = request.GET.get('text', 'default')
     removepunc = request.GET.get('removepunc', 'off')
+    capitaliz = request.GET.get('capitaliz', 'off')
 
+    # check for panctuation mark
     if removepunc == "on":
         punctuations = '''!()-[]{};:\'",<>./?@#$%^&*_~'''
 
@@ -35,7 +37,16 @@ def analyze(request):
             'purpose': 'Removed Punctuations',
             'analyzed_text': analyzed
         }
-        return render(request, 'analyze.html', params)
 
+    elif capitaliz == "on":
+
+        analyzed = djtext.upper()
+
+        params = {
+            'purpose': 'Change to Upper-Case',
+            'analyzed_text': analyzed
+        }
+
+        return render(request, 'analyze.html', params)
     else:
         return HttpResponse('Error')
