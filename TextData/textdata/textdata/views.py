@@ -22,6 +22,8 @@ def analyze(request):
     removepunc = request.GET.get('removepunc', 'off')
     capitaliz = request.GET.get('capitaliz', 'off')
     newlineremover = request.GET.get('newlineremover', 'off')
+    extraspaceremover = request.GET.get('extraspaceremover', 'off')
+    charcounter = request.GET.get('charcounter', 'off')
 
     # check for panctuation mark
     if removepunc == "on":
@@ -38,6 +40,7 @@ def analyze(request):
             'purpose': 'Removed Punctuations',
             'analyzed_text': analyzed
         }
+
     # make it as capitaliz
     elif capitaliz == "on":
 
@@ -47,11 +50,37 @@ def analyze(request):
             'purpose': 'Change to Upper-Case',
             'analyzed_text': analyzed
         }
+
     # remve new line
     elif newlineremover == "on":
         analyzed = ""
+
+        # bind analyze & remove new line
+        for char in djtext:
+            if char != '\n':
+                analyzed += char
+
         params = {
             'purpose': 'Removed New Line',
+            'analyzed_text': analyzed
+        }
+
+    # extra space remover
+    elif(extraspaceremover == "on"):
+        analyzed = ""
+        for index, char in enumerate(djtext):
+            if not(djtext[index] == " " and djtext[index+1] == " "):
+                analyzed += char
+
+        params = {
+            'purpose': 'Removed NewLines',
+            'analyzed_text': analyzed
+        }
+    # char counter
+    elif charcounter == "on":
+        analyzed = len(djtext)
+        params = {
+            'purpose': 'Charater Counter ',
             'analyzed_text': analyzed
         }
 
