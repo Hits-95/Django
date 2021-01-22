@@ -18,12 +18,12 @@ def index(request):
 
 def analyze(request):
     # Get the text
-    djtext = request.GET.get('text', 'default')
-    removepunc = request.GET.get('removepunc', 'off')
-    capitaliz = request.GET.get('capitaliz', 'off')
-    newlineremover = request.GET.get('newlineremover', 'off')
-    extraspaceremover = request.GET.get('extraspaceremover', 'off')
-    charcounter = request.GET.get('charcounter', 'off')
+    djtext = request.POST.get('text', 'default')
+    removepunc = request.POST.get('removepunc', 'off')
+    capitaliz = request.POST.get('capitaliz', 'off')
+    newlineremover = request.POST.get('newlineremover', 'off')
+    extraspaceremover = request.POST.get('extraspaceremover', 'off')
+    charcounter = request.POST.get('charcounter', 'off')
 
     # check for panctuation mark
     if removepunc == "on":
