@@ -19,6 +19,7 @@ def index(request):
 def analyze(request):
     # Get the text
     djtext = request.POST.get('text', 'default')
+    
     removepunc = request.POST.get('removepunc', 'off')
     capitaliz = request.POST.get('capitaliz', 'off')
     newlineremover = request.POST.get('newlineremover', 'off')
